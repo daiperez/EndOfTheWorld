@@ -74,3 +74,68 @@ def bisection(f,interval,tolerance,verbose=False):
                   "interval", (xa, xb), "root", xm)
             
     return xm
+
+
+"""
+ODE Solve function
+Written by Jason
+"""
+
+def solve(f,y0,interval,steps,order=1):
+    """ Solve ODE by Euler or Runge-Kutta methods, with fixed number
+    of steps.
+
+    In contrast to the examples of Newman Chapter 8, which build up a
+    list, point by point, 
+    
+    f: function giving ODE as y'=f(x,y)
+    y0: initial value
+    interval: tuple region (a,b) on which to solve ODE
+    steps: number of steps
+    order: order of solution method (1 for Euler, 2 or 4 for Runge-Kutta)
+    
+    Returns (x,y) points, as (steps+1)x2 numpy array.
+    """
+    
+    from math import sin
+    from numpy import arange
+    from pylab import plot, xlabel,ylabel, show
+    
+    a,b = interval
+    h = (b - a)/steps
+    x = 0.0
+    t_points = arange(a,b,h)
+    x_points=[]
+    
+    # solve Euler method - source code found in Newman section 8.11
+    if order == 1:
+      
+        
+        for t in t_points:
+            x_points.append(x)
+            x += h*f(x,t)
+
+        
+       #print(t_points,x_points)
+    
+    # solve range-kutta 2nd order
+    if order == 2:
+        for t in t_points:
+            x_points.append(x)
+            k1 = h*f(x,t)
+            k2 = h*f(x+0.5*k1, t+0.5*h)
+            x += k2
+    
+    # solve range-kutta 4th order
+    if order == 4:
+        for t in t_points:
+            x_points.append(x)
+            k1 = h*f(x,t)
+            k2 = h*f(x+0.5*k1,t+0.5*h)
+            k3 = h*f(x+0.5*k2,t+0.5*h)
+            k4 = h*f(x+k3,t+h)
+            x += (k1+2*k2+2*k3+k4)/6
+            
+    plot(t_points,x_points)
+    xlabel("t")
+    ylabel("x(t)")
