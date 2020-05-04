@@ -75,6 +75,10 @@ def zombies:
     
     """
     
+    5/4/2020 Update
     
+    Our functions come from the SIR model for infectious disease, and have been modified slightly to account for the combined number of dead humans and zombies. We have s'(t) takes into account those who are suseptible to get infected with the zombie virus, I'(t) which takes into account those are infected, Z'(t), takes into account those are NOW zombies, and D'(t) which counts for those who are dead. The ODEs utilize parameters such as the  percent chance of people getting killed, percent chance of people getting infected, percent chance that zombies die by human act, and initial population sizes, to calculate the spread of the infection. We are also working on a way to implement more parameters such as speed of zombie and transmission rate that can be conditionally called. 
+    The limitations that this method has is that as the population get smaller, the graph begins to get less and less accurate due to unprodictability of the turn out. 
+    An ODE solver will be used to solve these differential equations, generating graphs to display how the human race did given a specific set of parameters. The boundary for this set of functions is either side winning, zombies or humans wipe the other out. There will be scenarios outlined with different time variables, where the zombie is introduced to different areas.
 
 
