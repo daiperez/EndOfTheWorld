@@ -1,0 +1,84 @@
+Jason and I are planning to Model the transmission of a zombie apocalypse utilizing the SIR model for the spread of infectious diseases.
+
+By utilizing  the SIR(susceptible, infectious, recovered) model for the spread of infectious diseases, Jason and I  will depict the patterns seen during a zombie apocalypse. This model allows us to use our independent variable, time, to depict the relationship between those who are susceptible to getting infected, those who are infected, and those who are recovering.
+
+This applies to physics by analyzing the number of organisms infected by the disease within a certain period of time. Knowing how to depict the spread of a disease is crucial to today’s society. Due to our high population, the probabilities of someone getting an infectious disease is high as opposed to 2 centuries ago. 
+ 
+In order to make a proper graph, we plan to use a modified version of the 4th order Runge-Kutta ODE solver that we created in weekly session 9. We plan to make our program interactive by asking the user certain questions. We hope to take into consideration population density, rate at which the zombies travel, and if people are isolating themselves. 
+
+The Runge-Kutta method is the best method to use for our project because it estimates solutions for ordinary differential equations via multiple iterations, fast and accurate, as opposed to using Euler’s method. What Runge-Kutta does is help us differntiate our ODE that we have set up, Thus allowing us to successfully depict graphs describing the population if susceptable, Infectected, zombies, and dead individuals.
+
+
+The equations that we will be using are:
+S'(t) = h-\beta SZ -delta(s)S
+  This formula takes into account those who are susceptible to get infected with the zombie virus.
+I'(t) =\beta SZ- \phi I - delta(I)I 
+  This formula takes into account those are infected.
+Z'(t) =delta(I) - \alpha SZ 
+   This formula takes into account those are NOW zombies.
+D'(t) =delta(s)S + delta(I)I + \alpha SZ
+  This formula takes into account those who are dead.
+  
+Where:
+‘h’ is the number of humans we started with that are susceptible to the disease.
+\beta is the transition rate.
+S is those who are susceptible
+Z is those who are zombies
+delta(s) is the rate at which susceptible people have died.
+\phi rate at which people turn into zombies
+delta(I)rate at which infected people have died.
+I is the number of infected individuals
+\alpha rate of killing.
+
+I am interested  in this topic because of the current events going on with COVID-19. During this time there are many graphs depicting the spread of the Novel Coronavirus under different circumstances. I am excited to learn how one codes different conditional statements such as what if the community keeps themselves in quarantine? What if the community avoids staying in quarantine? Does the speed in which the zombies travel affect the rate in which the disease spreads? How does the population size affect the rate in which the disease spreads (ie. x number of people cause y-percent of increase in the rate of the spread)?
+
+I will be working with Jason on this project. Jason will focus on population density and how it affects the rate in which the disease spreads. I will be focusing on the effects of isolation to the rate in which the disease travels. Of course we will be helping each other, but this is a good start to constructing a great program.
+
+
+[1] https://arxiv.org/pdf/1802.10443.pdf
+[2] https://physicsworld.com/a/zombie-physics/
+[3] https://www.maa.org/press/periodicals/loci/joma/the-sir-model-for-spread-of-disease-the-differential-equation-model
+[4] https://www.history.com/topics/folklore/history-of-zombies
+
+def zombies:
+    
+    """
+    SIR Zombie Model aka Zombie Apocalypse Model
+
+    s'(t) = h - beta*s*z - delta(s)*s
+    I'(t) = beta*s*z - ro*I - delta(I)*I
+    Z'(t) = ro*I -  alpha*s*z
+    D'(t) = delta(s)*s + delta(I)*I + alpha*s*z
+    
+    
+    s'(t): takes into account those who are suseptible to get infected with the zombie virus
+            h : number of humans we begin with
+            beta*s*z : Those infected with zombie virus
+            delta(s)*s : Those who are dead/killed
+            
+            
+    I'(t): Takes into account those are infected
+            ro*I : Number of infected rate
+            beta*s*z : Those infected with zombie virus
+            delta(I)*I : When people are killed/dead
+             
+    
+    Z'(t): Takes into account those are NOW zombies
+            ro*I : Number of infected rate
+            alpha*s*z : human and zombie interaction. Humans killing zombies
+            
+            
+    D'(t): Those who are dead
+            delta(s)*s : Those who are dead/killed
+            delta(I)*I : When people are killed/dead
+            alpha*s*z : human and zombie interaction. Humans killing zombies
+    
+    """
+    
+    5/4/2020 Update
+    
+    Our functions come from the SIR model for infectious disease, and have been modified slightly to account for the combined number of dead humans and zombies. We have s'(t) takes into account those who are suseptible to get infected with the zombie virus, I'(t) which takes into account those are infected, Z'(t), takes into account those are NOW zombies, and D'(t) which counts for those who are dead. The ODEs utilize parameters such as the  percent chance of people getting killed, percent chance of people getting infected, percent chance that zombies die by human act, and initial population sizes, to calculate the spread of the infection. We are also working on a way to implement more parameters such as speed of zombie and transmission rate that can be conditionally called. 
+    The limitations that this method has is that as the population get smaller, the graph begins to get less and less accurate due to unprodictability of the turn out. 
+    An ODE solver will be used to solve these differential equations, generating graphs to display how the human race did given a specific set of parameters. The boundary for this set of functions is either side winning, zombies or humans wipe the other out. There will be scenarios outlined with different time variables, where the zombie is introduced to different areas.
+
+
